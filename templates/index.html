@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Recipe Website!</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('desserts') }}">Desserts</a></li>
+            <li><a href="{{ url_for('appetizers') }}">Appetizers</a></li>
+            <li><a href="{{ url_for('main_courses') }}">Main Courses</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>About</h2>
+        <p>This website provides a variety of delicious recipes for desserts, appetizers, and main courses. Explore the different sections to find recipes that suit your taste!</p>
+    </main>
+    <footer>
+        <p>&copy; 2023 Recipe Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
