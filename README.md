@@ -39,3 +39,20 @@ HTTP methods are like instructions that tell the server what action to perform w
 ### Variable Rules
 Variable rules in Flask allow you to capture dynamic parts of a URL, like usernames or product IDs. They act like placeholders in your routes. For example, if you have a route `'/user/<username>'`, the `'<username>'` part can be any value, and Flask will pass it as a parameter to the corresponding view function, enabling dynamic content generation based on the URL input.
 
+
+## Day 3 - Static Files and Rendering Templates
+
+To style this app, we will create a custom CSS stylesheet (directory: `static/css/style.css`) which will import the [Bulma](https://bulma.io/documentation/) CSS Framework.
+
+### Static Files
+Getting the css file to work we use `url_for('static', filename='css/style.css')`.
+
+### Rendering Templates
+To render a template we need to use the `render_template()` function
+- In `app.py`, import the function with `from flask import render_template`
+- Then we need to return the template: 
+```
+@app.route('/route/')
+def template(name=None):
+    return render_template('template.html', name=name)
+```

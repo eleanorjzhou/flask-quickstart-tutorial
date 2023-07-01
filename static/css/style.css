@@ -1,0 +1,138 @@
+/* Bulma framework */
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+
+/* Custom code */
+
+body {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+.navbar {
+    margin: 2vh 10vw;
+}
+
+.navbar a {
+    transition: 0.2s ease-in-out;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+    color: #FCA128;
+    transition: 0.2s ease-in-out;
+}
+
+.navbar-brand a {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.logo {
+    max-height: 2.30rem !important; 
+    margin: 0.50rem;
+}
+
+.hero-head {
+    margin: 10vh 1vw;
+}
+
+.hero-head h1 {
+    text-align: center;
+    padding-bottom: 3vh;
+}
+
+.hero-head p {
+    text-align: center;
+}
+
+.hero-body {
+    /*position: absolute;
+    left: 0;
+    right: 0;
+    top: 30vh;*/
+    align-self: center;
+    padding: 0;
+}
+
+.card {
+    margin: 1rem;
+    width: 30vw;
+    height: 30vh;
+    box-shadow: none;
+    transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
+    transition: 0.2s ease-in-out;
+}
+
+.hero-foot {
+    margin: 20vh 0;
+}
+
+.hero-foot h2,
+.hero-foot h3
+ {
+    padding-bottom: 3vh;
+}
+
+.hero-foot h2,
+.hero-foot h3,
+.hero-foot p,
+.hero-foot ul li {
+    line-height: 2.50rem;
+}
+
+.hero-foot ul li span {
+    padding-right: 1.50rem;
+}
+
+.hero-divider {
+    height: 5vh;
+}
+
+.cto {
+    margin-top: 30vh;
+    text-align: center;
+}
+
+.cto p{
+    line-height: 3rem;
+}
+
+.cto button {
+    margin: 5rem;
+    width: 20rem;
+    height: 5rem;
+    border: none;
+    border-radius: 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    transition: 0.2s ease-in-out;
+}
+
+.cto button:hover,
+.cto button:focus {
+    background-color: #FCA128;
+    color: white;
+    transition: 0.2s ease-in-out;
+}
+
+footer p {
+    text-align: center;
+    line-height: 2rem;
+}
+

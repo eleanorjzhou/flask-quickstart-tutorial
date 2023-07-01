@@ -32,7 +32,7 @@ with app.test_request_context():
 
 
 # HTTP Methods - All methods in one function
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login(name=None):
     if request.method == 'POST':
         username = request.form['username']
@@ -45,10 +45,10 @@ def login(name=None):
     
 
 # HTTP Methods Alternative - Separate views for different methods into different functions
-@app.get('/login')
+@app.get('/login/')
 def login_get():
     return show_the_login_form()
 
-@app.post('/login')
+@app.post('/login/')
 def login_post():
     return do_the_login()

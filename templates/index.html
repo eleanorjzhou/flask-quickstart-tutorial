@@ -1,30 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Recipe Website</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Appétit | The Recipe App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Recipe Website!</h1>
-    </header>
     
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('desserts') }}">Desserts</a></li>
-            <li><a href="{{ url_for('appetizers') }}">Appetizers</a></li>
-            <li><a href="{{ url_for('main_courses') }}">Main Courses</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="navbar-menu">
+            <div class="navbar-brand">
+                <a href="{{ url_for('home') }}" class="navbar-item">
+                    <img class="logo" src="{{ url_for('static', filename='img/logo.svg') }}" alt="logo">
+                    Appétit
+                </a>
+            </div>
+            <div class="navbar-end">
+                <a href="{{ url_for('desserts') }}" class="navbar-item">Desserts</a>
+                <a href="{{ url_for('appetizers') }}" class="navbar-item">Appetizers</a>
+                <a href="{{ url_for('main_courses') }}" class="navbar-item">Main Courses</a>
+                <a href="{{ url_for('login') }}" class="navbar-item">Login</a>
+            </div>
+        </div>
     </nav>
 
-    <main>
-        <h2>About</h2>
-        <p>This website provides a variety of delicious recipes for desserts, appetizers, and main courses. Explore the different sections to find recipes that suit your taste!</p>
+    <main class="container is-max-desktop">
+        <div class="hero is-fullheight">
+
+            <div class="hero-head">
+                <h1 class="title is-1">Bon Appétit <span>🍝</span></h1>
+                <p class="subtitle is-4">One-stop app for tasty recipes from around the world – easy, fun, and satisfying!</p>        
+            </div>
+            
+            <div class="hero-body">
+                <div>
+                    <img src="{{ url_for('static', filename='img/hero-img.webp') }}" alt="hero-image">
+                </div>
+            </div>
+            
+            <div class="hero-foot">
+                <h2 class="title is-3">
+                    Our app is all about 
+                    <br>
+                    good vibes and delicious recipes!
+                </h2>
+                <p class="subtitle is-4">
+                    It's like having a cool friend who shares amazing recipes from around the world. 
+                    <br>
+                    Whether you're a kitchen pro or just starting out, our app has an awesome collection of desserts, appetizers, and main courses. Get ready to explore, cook, and enjoy tasty meals with ease.
+                </p>
+                <div class="hero-divider"></div>
+                <h3 class="title is-3">What you get</h3>
+                <ul class="subtitle is-4">
+                    <li><span>🍰</span>Easy-to-follow recipes</li>
+                    <li><span>🍣</span>Stress-free in the kitchen</li>
+                    <li><span>🌮</span>Laid-back culinary companion</li>
+                    <li><span>🥘</span>Get inspired, try new flavors, and have fun cooking up a storm!</li>
+                </ul>
+                <div class="cto">
+                    <p class="subtitle is-3">
+                        Ready to embark on a flavorful journey? 
+                        <br>
+                        Join us now and let your culinary adventures begin!
+                    </p>
+                    <button>Sign Up Now</button>
+                </div>
+            </div>
+
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2023 Recipe Website. All rights reserved.</p>
+    <footer class="footer">
+        <p>Made with <span>🍅</span> in Canada</p>
+        <p>&copy; 2023 Appétit The Recipe App. All rights reserved.</p>
     </footer>
 </body>
 </html>
