@@ -56,3 +56,139 @@ To render a template we need to use the `render_template()` function
 def template(name=None):
     return render_template('template.html', name=name)
 ```
+
+
+## Day 4 - Accessing Request Data
+
+### Context Locals
+We can use context locals to implement unit testing:
+- `test_request_context()` allows you to create a simulated request context to test parts of our Flask app
+- The code that utilizes `test_request_context()` should typically be added in a separate testing file or within a testing framework such as `pytest`
+- Example:
+```
+# test_app.py Unit test code
+
+from flask import request
+from app import app, greet
+
+def test_greet_route_with_name():
+    with app.test_request_context('/greet?name=Jack', method='GET'):
+        # now you can do something with the request until the
+        # end of the with block, such as basic assertions:
+        assert request.path == '/greet' # checks if the path of the request matches '/greet', ensuring that the expected route is being accessed
+        assert request.method == 'GET' # verifies that the HTTP method of the request is set to 'GET', ensuring that the expected method is being used
+        assert request.args.get('name') == 'Jack' # checks if the value of the 'name' query parameter in the test request context is 'John'. It ensures that the parameter is correctly passed and accessible in the request.args dictionary
+        response = greet() # calls the greet() function within the test request context. It captures the response returned by the function
+        assert response == "Hello, Jack!" # checks if the response returned by the greet() function is equal to the expected value "Hello, John!". It verifies that the greet() function behaves as expected based on the provided request context
+```
+
+### The Request Object
+The `request` object in Flask provides access to various attributes and methods that allow you to work with the data sent in an HTTP request.
+- Example: Access form data
+```
+# This is an example of a simple login by validating form data fetched by the GET method
+
+# In app.py
+
+from flask import request  # HTTP Methods
+from login_utils import validate_login # Login validation
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login(name=None):
+
+    error = None
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Perform login authentication and validation
+        if validate_login(username, password):
+
+            # Redirect to a different page or return a response based on the authentication result
+            return f'Welcome, {username}! Login successful.'
+    
+        else:
+
+            error = 'Invalid username/password'
+
+    return render_template('login.html', error=error) # Show the login form
+
+
+# In login_utils.py
+
+def validate_login(username, password):
+    # Perform validation logic here
+    if username == 'PineappleJack' and password == '12345':
+        return True
+    else:
+        return False
+
+```
+
+
+### File Uploads
+1. In HTML form, set the attribute `enctype="multipart/form-data"`, for example:
+```
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
+```
+2. In `app.py`:
+```
+from werkzeug.utils import secure_filename # Optional - Use if you want to use the filename of the client to store the file on the server
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+
+    message = None
+
+    if request.method == 'POST':
+
+        file = request.files['file'] # access the uploaded file
+
+        if file:
+
+            # Process the uploaded file
+            filename = file.filename
+            file.save(f"var/www/uploads/{filename}") # save the file
+
+            # To use the filename of the client to store the file on the server
+            # file.save(f"var/www/uploads/{secure_filename(filename)}")
+        
+        else:
+
+            message = "No file selected."
+            
+    return render_template('upload.html', message=message)
+```
+
+
+### Cookies
+Cookies are small pieces of data stored on the client-side (user's browser) by a website. They are used to store information that can be accessed and retrieved by the website or server on subsequent visits or requests.
+- Note: If you want to use sessions, do not use the cookies directly but instead use the Sessions in Flask that add some security on top of cookies for you.
+- Reading cookies:
+```
+from flask import request
+
+@app.route('/')
+def index():
+    username = request.cookies.get('username')
+    # use cookies.get(key) instead of cookies[key] to not get a KeyError if the cookie is missing.
+```
+- Setting/Storing cookies:
+```
+from flask import make_response
+
+@app.route('/')
+def index():
+    res = make_response(render_template(...))
+    res.set_cookie('username', 'PineappleJack', max_age=3600, secure=True, httponly=True)
+    return res
+```
+- max_age: The maximum age of the cookie in seconds (in this case, it expires after 3600 seconds or 1 hour).
+- secure: The cookie will only be sent over a secure (HTTPS) connection.
+- httponly: The cookie cannot be accessed or modified by client-side JavaScript, enhancing security against certain types of attacks.
+
